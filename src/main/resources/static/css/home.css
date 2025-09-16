@@ -1,0 +1,89 @@
+body {
+  font-family: system-ui, Arial, sans-serif;
+  background: #f8f9fa;
+  margin: 0;
+}
+
+header {
+  background: #2c3e50;
+  color: #fff;
+   padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h2 {
+  margin: 0;
+}
+
+header nav a {
+  color: #fff;
+  margin-left: 15px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.card {
+  display: flex;
+  gap: 12px;
+  border: 1px solid #ddd;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.card div {
+  flex: 1;
+}
+
+.small {
+  font-size: 13px;
+  color: #555;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.status-pending {
+  background: #f39c12;
+}
+
+.status-approved {
+  background: #27ae60;
+}
+
+.status-rejected {
+  background: #c0392b;
+}
