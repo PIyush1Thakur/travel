@@ -1,62 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>CityCare</title>
-  <link rel="stylesheet" href="/css/index.css">
+    <meta charset="UTF-8">
+    <title>My Journey</title>
 </head>
 <body>
-
-<header class="header">
-  <div class="logo">
-    <img src="india.png" alt="Indian Flag">
-    <h1>CityCare Portal</h1>
-  </div>
-  <nav>
-    <ul>
-      <a href="/home.html">All Complains</a>
-      <a href="#">Jobs</a>
-      <a href="/register.html">Register</a>
-      <a href="/login.html">Login</a>
-    </ul>
-  </nav>
-</header>
-
-<section class="hero">
-  <div class="hero-text">
-    <h2>Welcome to CityCare</h2>
-    <p>
-      A secure platform to manage Complains, access job opportunities,
-      and connect with government services.
-    </p>
-    <a href="/register.html" class="btn">Get Started</a>
-  </div>
-</section>
-
-<section class="services">
-  <h2>Our Services</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>Digital Complains</h3>
-      <p>Create and manage your digital Complains securely.</p>
-      <a href="/home.html" class="link">View Complains</a>
-    </div>
-    <div class="card">
-      <h3>Job Opportunities</h3>
-      <p>Find government and private job openings in one place.</p>
-      <a href="#" class="link">Explore Jobs</a>
-    </div>
-    <div class="card">
-      <h3>Citizen Services</h3>
-      <p>Access important government services online.</p>
-      <a href="#" class="link">Learn More</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <p>&copy; 2025 Digital CityCare</p>
-</footer>
-
+<div id="list"></div>
 </body>
+<script>
+    fetch("http://localhost:8080/user/journey/all",{
+    method:"GET",
+    headers:{"Content-Type":"application/json"
+    },
+      credentials: "include"
+    })
+     .then(response => {
+        if (!response.ok) {
+            throw new Error("Failed to fetch journeys");
+        }
+        return response.json();
+    })
+    .then(data => {
+        const container = document.getElementById("list");
+
+        if (data.length === 0) {
+            container.innerHTML = "<p>No journeys found</p>";
+            return;
+        }
+
+        data.forEach(journey => {
+            const item = document.createElement("div");
+            item.innerHTML = `
+                <h3>${journey.jortitle}</h3>
+                <p><b>Location:</b> ${journey.jorlocation}</p>
+                <p><b>Description:</b> ${journey.jordescription}</p>
+                <hr>
+            `;
+            container.appendChild(item);
+        });
+    })
+    .catch(err => {
+        document.getElementById("list").innerHTML =
+            "<p style='color:red;'>Error: " + err.message + "</p>";
+    });
+</script>
 </html>

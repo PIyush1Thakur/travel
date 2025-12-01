@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Journey Web App</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #dfe9f3, #ffffff);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 18px 0;
+            backdrop-filter: blur(14px);
+            background: rgba(255, 255, 255, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            z-index: 1000;
+        }
+
+        header nav {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        header nav a {
+            text-decoration: none;
+            color: #111;
+            font-size: 18px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        header nav a:hover {
+            color: #6a4bff;
+            transform: scale(1.1);
+        }
+
+        .container {
+            display: flex;
+            height: 100%;
+            padding-top: 80px;
+        }
+
+        .left-panel {
+            width: 30%;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px);
+            border-right: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .left-panel h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #222;
+        }
+
+        form input, form textarea, form button {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            font-size: 16px;
+        }
+
+        form input:focus, form textarea:focus {
+            outline: 2px solid #6a4bff;
+        }
+
+        form button {
+            background: #6a4bff;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        form button:hover {
+            transform: scale(1.02);
+            background: #5737ff;
+        }
+
+        .right-panel {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .preview, .journeys-list {
+            padding: 25px;
+        }
+
+        .preview {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(18px);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .journeys-list {
+            flex: 1.5;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(18px);
+        }
+
+        .preview-box {
+            padding: 20px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .journey-card {
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.9);
+            margin-bottom: 16px;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .journey-card:hover {
+            transform: translateY(-3px);
+            background: #ffffff;
+        }
+
+        h3, h4, p {
+            margin: 5px 0;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c5c5c5;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <a href="/index.html">Home</a>
+        <a href="/register.html">Register</a>
+        <a href="/home.html">All Identities</a>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="left-panel">
+        <h3>Add Journey</h3>
+
+        <form id="journeyForm">
+            <input type="text" id="jortitle" name="jortitle" placeholder="Journey Title" required>
+            <input type="text" id="jorlocation" name="jorlocation" placeholder="Journey Location" required>
+            <textarea id="jordescription" name="jordescription" placeholder="Journey Description" rows="4" required></textarea>
+            <button type="submit">Add Journey</button>
+        </form>
+    </div>
+
+    <div class="right-panel">
+
+        <div class="preview">
+            <h3>Live Preview</h3>
+            <div class="preview-box">
+                <h2 id="previewTitle">Journey Title...</h2>
+                <h4 id="previewLocation">Journey Location...</h4>
+                <p id="previewDescription">Journey Description...</p>
+            </div>
+        </div>
+
+        <div class="journeys-list">
+            <h3>Your Journeys</h3>
+            <div id="journeysContainer"></div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const titleInput = document.getElementById("jortitle");
+    const locationInput = document.getElementById("jorlocation");
+    const descriptionInput = document.getElementById("jordescription");
+
+    titleInput.addEventListener("input", () => {
+        document.getElementById("previewTitle").textContent = titleInput.value || "Journey Title...";
+    });
+
+    locationInput.addEventListener("input", () => {
+        document.getElementById("previewLocation").textContent = locationInput.value || "Journey Location...";
+    });
+
+    descriptionInput.addEventListener("input", () => {
+        document.getElementById("previewDescription").textContent = descriptionInput.value || "Journey Description...";
+    });
+
+    document.getElementById("journeyForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const journey = {
+            jortitle: titleInput.value,
+            jorlocation: locationInput.value,
+            jordescription: descriptionInput.value
+        };
+
+        try {
+            const res = await fetch("http://localhost:8080/user/add/journey", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(journey)
+            });
+
+            const data = await res.text();
+
+            if (!res.ok) {
+                alert("Error: " + data);
+                return;
+            }
+
+            alert("Journey Added Successfully");
+            document.getElementById("journeyForm").reset();
+
+            document.getElementById("previewTitle").textContent = "Journey Title...";
+            document.getElementById("previewLocation").textContent = "Journey Location...";
+            document.getElementById("previewDescription").textContent = "Journey Description...";
+
+            loadJourneys();
+
+        } catch (err) {
+            alert("Network Error: " + err.message);
+        }
+    });
+
+    async function loadJourneys() {
+        const container = document.getElementById("journeysContainer");
+        container.innerHTML = "Loading...";
+
+        try {
+            const res = await fetch("http://localhost:8080/user/journey/my");
+
+            if (!res.ok) {
+                container.innerHTML = "Unable to load journeys.";
+                return;
+            }
+
+            const journeys = await res.json();
+            container.innerHTML = "";
+
+            journeys.forEach(j => {
+                const div = document.createElement("div");
+                div.className = "journey-card";
+                div.innerHTML = `
+                    <h3>${j.jortitle}</h3>
+                    <h4>${j.jorlocation}</h4>
+                    <p>${j.jordescription}</p>
+                `;
+                container.appendChild(div);
+            });
+
+        } catch (err) {
+            container.innerHTML = "Network error.";
+        }
+    }
+
+    loadJourneys();
+</script>
+
+</body>
+</html>
