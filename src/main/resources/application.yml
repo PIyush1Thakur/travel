@@ -1,0 +1,4 @@
+spring:
+  data:
+    mongodb:
+      uri: ${mongodb+srv://piyush:Java2323@cluster0.9ocuvyt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0}

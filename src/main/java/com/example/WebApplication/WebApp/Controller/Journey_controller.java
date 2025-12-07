@@ -10,8 +10,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,6 +29,9 @@ public class Journey_controller {
 
     @Autowired
     private Journey_Repository journeyRepository;
+
+    private static final String UPLOAD_DIR = System.getProperty("user.dir") + "/uploads/";
+
 
     @Autowired
     private UsersRepository usersRepository;
@@ -50,7 +60,7 @@ public class Journey_controller {
     }
 
 
-    @GetMapping("/journey/all")
+    @GetMapping("/journey")
     public List<Journey> showall(){
         try{
                 return   journeyRepository.findAll();
@@ -62,42 +72,57 @@ public class Journey_controller {
 
     @PostMapping("/add/journey")
     @Transactional
-    public ResponseEntity<?> addProduct(@RequestBody Journey journey){
+    public ResponseEntity<?> addProduct(
+            @RequestParam("jortitle") String title,
+            @RequestParam("jorlocation") String location,
+            @RequestParam("jordescription") String description,
+            @RequestParam("image") MultipartFile image) {
+
         try {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            String username = authentication.getName();
+            Path uploadDir = Paths
+                    .get(System.getProperty("user.dir"), "uploads")
+                    .toAbsolutePath()
+                    .normalize();
 
-            if (username == null) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body("User not found or not logged in");
+            File folder = uploadDir.toFile();
+
+            if (!folder.exists()) {
+                boolean created = folder.mkdirs();
+                System.out.println("Created uploads folder: " + created);
             }
 
-            // Fetch user entity
-            UsersEntries userEntity  = usersRepository.findByUsername(username);
-
-            if (userEntity == null) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body("User not found in database");
+            if (!folder.exists()) {
+                return ResponseEntity.status(500).body("Cannot create uploads directory.");
             }
 
+            String originalName = StringUtils.cleanPath(image.getOriginalFilename());
+            String fileName = System.currentTimeMillis() + "_" + originalName;
+
+            Path filePath = uploadDir.resolve(fileName);
+
+            System.out.println("Saving file to: " + filePath);
+
+            Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
             Journey newJourney = new Journey(
-                    journey.getJortitle(),
-                    journey.getJorlocation(),
-                    journey.getJordescription(),
-                    userEntity.getId()  // safe now
+                    title,
+                    location,
+                    description,
+                    usersRepository.findByUsername(
+                            SecurityContextHolder.getContext().getAuthentication().getName()
+                    ).getId(),
+                    "uploads/" + fileName
             );
 
             journeyRepository.save(newJourney);
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body("Journey Added Successfully");
 
-        } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
-                    .body("Error: " + e.getMessage());
+            return ResponseEntity.ok("Journey Added Successfully");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error: " + e.getMessage());
         }
     }
-
 
     @DeleteMapping("/jounery/{id}")
     public ResponseEntity<?> deletejourney(@PathVariable String id){

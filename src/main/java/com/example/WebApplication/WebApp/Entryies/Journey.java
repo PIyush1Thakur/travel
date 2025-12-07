@@ -25,6 +25,20 @@ public class Journey {
     @NonNull
     private String jordescription;
 
+    @NonNull
+    private String imagePath;
+
+
+    public @NonNull String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(@NonNull String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+
+
     public @NonNull String getJortitle() {
         return jortitle;
     }
@@ -49,11 +63,12 @@ public class Journey {
         this.jordescription = jordescription;
     }
 
-    public Journey(@NonNull String jortitle, @NonNull String jorlocation, @NonNull String jordescription, String userid) {
+    public Journey(@NonNull String jortitle, @NonNull String jorlocation, @NonNull String jordescription, String userid,String imagePath) {
         this.jortitle = jortitle;
         this.jorlocation = jorlocation;
         this.jordescription = jordescription;
         this.userid =userid;
+        this.imagePath = imagePath;
     }
 public Journey() {}
 

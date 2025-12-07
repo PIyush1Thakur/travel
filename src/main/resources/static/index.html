@@ -1,47 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Journey</title>
-</head>
-<body>
-<div id="list"></div>
-</body>
-<script>
-    fetch("http://localhost:8080/user/journey/all",{
-    method:"GET",
-    headers:{"Content-Type":"application/json"
-    },
-      credentials: "include"
-    })
-     .then(response => {
-        if (!response.ok) {
-            throw new Error("Failed to fetch journeys");
-        }
-        return response.json();
-    })
-    .then(data => {
-        const container = document.getElementById("list");
+  <head>
+    <title>INCREDIBLE INDIA</title>
+    <link rel="icon" href="img/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="main-header">
+      <nav class="navbar">
+        <div class="logo">
+          <span class="logo-mark">✈️</span>
+          <span class="logo-text">Incredible<span>India</span></span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#planner">Planner</a></li>
+          <li><a href="#vibes">Vibes</a></li>
+          <li><a href="#heritage">Heritage</a></li>
+          <li><a href="#wildlife">Wildlife</a></li>
+          <li><a href="dashboard.html" class="active-link">My Journeys</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </header>
 
-        if (data.length === 0) {
-            container.innerHTML = "<p>No journeys found</p>";
-            return;
-        }
+    <section id="home" class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-tagline">Discover. Plan. Experience.</p>
+        <h1>Design Your Dream Journey Across India</h1>
+        <p class="hero-subtitle">
+          From the Himalayas to the Indian Ocean, palaces to jungles – craft a
+          trip that matches your vibe, your budget, and your story.
+        </p>
+        <div class="hero-actions">
+          <a href="#planner" class="btn primary-btn">Start Planning</a>
+          <a href="#vibes" class="btn ghost-btn">Explore Vibes</a>
+        </div>
+      </div>
+    </section>
 
-        data.forEach(journey => {
-            const item = document.createElement("div");
-            item.innerHTML = `
-                <h3>${journey.jortitle}</h3>
-                <p><b>Location:</b> ${journey.jorlocation}</p>
-                <p><b>Description:</b> ${journey.jordescription}</p>
-                <hr>
-            `;
-            container.appendChild(item);
-        });
-    })
-    .catch(err => {
-        document.getElementById("list").innerHTML =
-            "<p style='color:red;'>Error: " + err.message + "</p>";
-    });
-</script>
+    <section id="planner" class="section planner-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span>Trip Planner</span>
+        </h2>
+        <p class="section-subtitle">
+          Tell us your preferences, and we’ll suggest the perfect Indian
+          itinerary.
+        </p>
+      </div>
+
+      <div class="planner-grid">
+        <form id="tripPlannerForm" class="planner-form">
+          <div class="form-group">
+            <label for="days">Trip Duration (days)</label>
+            <input
+              type="number"
+              id="days"
+              min="1"
+              max="30"
+              placeholder="e.g. 7"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="vibe">Choose Your Vibe</label>
+            <select id="vibe" required>
+              <option value="">Select a vibe</option>
+              <option value="heritage">Heritage & Culture</option>
+              <option value="mountains">Mountains & Adventure</option>
+              <option value="beach">Beach & Chill</option>
+              <option value="spiritual">Spiritual & Peaceful</option>
+              <option value="party">Nightlife & Party</option>
+              <option value="wildlife">Nature & Wildlife</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="budget">Budget (per person)</label>
+            <select id="budget" required>
+              <option value="">Select budget</option>
+              <option value="budget">₹ – Budget</option>
+              <option value="mid">₹₹ – Mid-range</option>
+              <option value="luxury">₹₹₹ – Luxury</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="month">Preferred Month</label>
+            <select id="month" required>
+              <option value="">Select month</option>
+              <option>January–February</option>
+              <option>March–April</option>
+              <option>May–June</option>
+              <option>July–August</option>
+              <option>September–October</option>
+              <option>November–December</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn primary-btn full-width">
+            Generate My Plan
+          </button>
+        </form>
+
+        <div class="planner-output" id="plannerOutput">
+          <h3>Your Smart Plan ✨</h3>
+          <p class="placeholder">
+            Fill the planner form to see a customized suggestion here.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="vibes" class="section vibes-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span>Places by Vibes</span>
+        </h2>
+        <p class="section-subtitle">
+          Whether you want beaches, mountains, or parties – India has a vibe for
+          everyone.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card" data-vibe="beach">
+          <div class="card-image card-image-goa"></div>
+          <div class="card-content">
+            <h3>Beach & Chill</h3>
+            <p>Goa · Gokarna · Varkala</p>
+            <p class="card-text">
+              Golden sands, shacks, sunsets, and laid-back living – perfect for
+              a slow, relaxed escape.
+            </p>
+          </div>
+        </article>
+
+        <article class="card" data-vibe="mountains">
+          <div class="card-image card-image-mountains"></div>
+          <div class="card-content">
+            <h3>Mountains & Adventure</h3>
+            <p>Manali · Leh–Ladakh · Rishikesh</p>
+            <p class="card-text">
+              Snowy peaks, trekking trails, riverside camps, and adventure
+              sports for thrill seekers.
+            </p>
+          </div>
+        </article>
+
+        <article class="card" data-vibe="spiritual">
+          <div class="card-image card-image-spiritual"></div>
+          <div class="card-content">
+            <h3>Spiritual & Peaceful</h3>
+            <p>Varanasi · Rishikesh · Bodh Gaya</p>
+            <p class="card-text">
+              Ghats, temples, ashrams, and meditation retreats for a deeply
+              reflective journey.
+            </p>
+          </div>
+        </article>
+
+        <article class="card" data-vibe="party">
+          <div class="card-image card-image-party"></div>
+          <div class="card-content">
+            <h3>Nightlife & Party</h3>
+            <p>Mumbai · Bangalore · Delhi</p>
+            <p class="card-text">
+              Rooftop bars, nightclubs, live music and city vibes that never
+              sleep.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <section id="heritage" class="section heritage-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span>Heritage of India</span>
+        </h2>
+        <p class="section-subtitle">
+          A timeline of monuments that tell the story of India’s rich past.
+        </p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content adon1">
+            <h3>Taj Mahal, Agra</h3>
+            <span class="timeline-year">Built: 1632 – 1653</span>
+            <p>
+              A monument of love in white marble, commissioned by Mughal Emperor
+              Shah Jahan for Mumtaz Mahal.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content adon2">
+            <h3>Qutub Minar, Delhi</h3>
+            <span class="timeline-year";"
+              >Construction: late 12th – early 13th century</span
+            >
+            <p>
+              One of the tallest brick minarets in the world, marking the
+              beginning of Delhi Sultanate rule.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content adon3">
+            <h3>Hampi, Karnataka</h3>
+            <span class="timeline-year">Flourished: 14th – 16th century</span>
+            <p>
+              Capital of the Vijayanagara Empire, filled with temples, bazaars,
+              and royal complexes in stone.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content adon4">
+            <h3>Jaipur City Palace, Rajasthan</h3>
+            <span class="timeline-year">Built: early 18th century</span>
+            <p>
+              A blend of Rajput and Mughal architecture, showcasing royal
+              courts, museums, and courtyards.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="wildlife" class="section wildlife-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span>Wildlife of India</span>
+        </h2>
+        <p class="section-subtitle">
+          From Bengal tigers to one-horned rhinos, explore India’s diverse
+          national parks.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card wildlife-card">
+          <div class="card-image card-image-corbett"></div>
+          <div class="card-content">
+            <h3>Jim Corbett National Park</h3>
+            <p>Uttarakhand · Tigers · Safaris</p>
+            <p class="card-text">
+              India’s oldest national park, famous for Bengal tiger sightings
+              and dense sal forests.
+            </p>
+          </div>
+        </article>
+
+        <article class="card wildlife-card">
+          <div class="card-image card-image-ranthambore"></div>
+          <div class="card-content">
+            <h3>Ranthambore National Park</h3>
+            <p>Rajasthan · Tigers · Fort Ruins</p>
+            <p class="card-text">
+              Dramatic landscapes with an old fort in the backdrop – perfect for
+              wildlife & photography.
+            </p>
+          </div>
+        </article>
+
+        <article class="card wildlife-card">
+          <div class="card-image card-image-kaziranga"></div>
+          <div class="card-content">
+            <h3>Kaziranga National Park</h3>
+            <p>Assam · One-horned Rhinos</p>
+            <p class="card-text">
+              A UNESCO site known for its population of Indian one-horned
+              rhinoceros and rich birdlife.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Copyrights &copy; 2025 INCREDIBLE INDIA · TEAM MOBIUS</p>
+    </footer>
+
+    <script src="js/script.js" defer></script>
+  </body>
 </html>

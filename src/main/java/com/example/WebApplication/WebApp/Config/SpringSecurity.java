@@ -37,13 +37,13 @@ public class SpringSecurity {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login.html", "/api/auth/register", "/css/**", "/js/**").permitAll()
                         .requestMatchers("/jobs/all").hasRole("ADMIN")
-//                        .requestMatchers("/user/**", "/jobs/**").authenticated()
+                        .requestMatchers("/dashboard.html","/user/add/journey","/user/journey/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
                         .loginPage("/login.html")
                         .loginProcessingUrl("/api/auth/login")
-                        .defaultSuccessUrl("/user/home", true)
+                        .defaultSuccessUrl("/", true)
                         .failureUrl("/login.html?error=true")
                         .permitAll()
                 )
