@@ -27,7 +27,7 @@ html {
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Poppins", sans-serif;
-  background: radial-gradient(circle at top, #101935 0%, var(--bg) 55%, #02010a 100%);
+  background: radial-gradient(circle at top, #101935 0, #050816 55%, #02010a 100%);
   color: var(--text);
   min-height: 100vh;
 }
@@ -35,7 +35,6 @@ body {
 ::-webkit-scrollbar {
   width: 8px;
 }
-
 ::-webkit-scrollbar-thumb {
   background: rgba(150, 150, 170, 0.7);
   border-radius: 999px;
@@ -67,7 +66,7 @@ body {
   font-size: clamp(2rem, 3vw, 2.4rem);
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  margin-bottom: 0.75rem;
+  margin: 0 0 0.75rem;
   display: inline-block;
   position: relative;
 }
@@ -77,7 +76,6 @@ body {
   z-index: 1;
 }
 
-/* Gradient lines below section titles */
 .section-title::before,
 .section-title::after {
   content: "";
@@ -93,7 +91,6 @@ body {
   width: 40%;
   left: 5%;
 }
-
 .section-title::after {
   width: 16%;
   right: 10%;
@@ -111,16 +108,15 @@ body {
   top: 0;
   z-index: 1000;
   backdrop-filter: blur(16px);
-  background: linear-gradient(to right, rgba(5, 8, 22, 0.94), rgba(5, 8, 22, 0.78));
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* Navbar styling */
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem min(7vw, 5rem);
+  background: linear-gradient(to right, rgba(5, 8, 22, 0.94), rgba(5, 8, 22, 0.78));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .logo {
@@ -139,11 +135,11 @@ body {
 }
 
 .nav-links {
+  list-style: none;
   display: flex;
   gap: 1.3rem;
   margin: 0;
   padding: 0;
-  list-style: none;
 }
 
 .nav-links a {
@@ -170,14 +166,17 @@ body {
   transition: width var(--transition-med);
 }
 
-.nav-links a:hover,
-.nav-links a.active-link {
+.nav-links a:hover {
   color: var(--text);
 }
 
 .nav-links a:hover::after,
 .nav-links a.active-link::after {
   width: 70%;
+}
+
+.nav-links a.active-link {
+  color: var(--text);
 }
 
 .nav-toggle {
@@ -198,7 +197,6 @@ body {
   transition: transform var(--transition-fast), opacity var(--transition-fast);
 }
 
-/* Buttons */
 .btn {
   border-radius: 999px;
   padding: 0.7rem 1.4rem;
@@ -218,7 +216,7 @@ body {
 
 .primary-btn {
   background: linear-gradient(120deg, var(--accent), var(--accent-2));
-  color: var(--bg);
+  color: #050816;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
 }
 
@@ -241,7 +239,6 @@ body {
   width: 100%;
 }
 
-/* Dashboard styling */
 .dashboard {
   background: radial-gradient(circle at top, rgba(255, 207, 51, 0.08), transparent 65%);
 }
@@ -255,7 +252,6 @@ body {
   z-index: 1;
 }
 
-/* Panel styling */
 .panel {
   position: relative;
   background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 60%),
@@ -276,7 +272,6 @@ body {
   pointer-events: none;
 }
 
-/* Panel form and journey text watermark */
 .panel-form::after {
   content: "Plan";
   position: absolute;
@@ -301,12 +296,12 @@ body {
 }
 
 .panel-title {
-  margin-bottom: 0.4rem;
+  margin: 0 0 0.4rem;
   font-size: 1.1rem;
 }
 
 .panel-helper {
-  margin-bottom: 1.3rem;
+  margin: 0 0 1.3rem;
   color: var(--text-muted);
   font-size: 0.86rem;
 }
@@ -415,16 +410,14 @@ body {
 }
 
 .preview-card h2 {
-  margin-bottom: 0.25rem;
+  margin: 0 0 0.25rem;
   font-size: 1.3rem;
 }
-
 .preview-card h4 {
-  margin-bottom: 0.6rem;
+  margin: 0 0 0.6rem;
   font-size: 0.95rem;
   color: var(--accent-2);
 }
-
 .preview-card p {
   margin: 0;
   font-size: 0.9rem;
@@ -432,11 +425,10 @@ body {
 }
 
 .journeys-wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-height: 0;
-  padding: 0.5rem;
-  position: relative;
 }
 
 .journeys-header {
@@ -445,85 +437,76 @@ body {
   justify-content: space-between;
   gap: 0.8rem;
   margin-bottom: 0.4rem;
-  padding-inline: 0.3rem;
 }
 
 .journeys-list {
-  margin-top: 0.8rem;
+  margin-top: 0.5rem;
   padding-right: 0.4rem;
   overflow-y: auto;
-  max-height: 350px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+  max-height: 260px;
 }
 
-/* Journey card improved */
 .journey-card {
   position: relative;
-  padding: 1.2rem;
-  border-radius: 1.2rem;
-  background: linear-gradient(150deg, rgba(255, 255, 255, 0.05), rgba(5, 8, 28, 0.96));
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.6);
-  display: grid;
-  grid-template-columns: 95px 1fr;
-  gap: 1.1rem;
-  align-items: start;
-  transition: all 0.3s ease;
+  padding: 1rem 1rem 1.1rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(3, 6, 23, 0.95));
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 0.9rem;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
+  transform-origin: center;
+  transform: translateY(0) scale(1);
+  transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med);
+}
+
+.journey-card::before {
+  content: "";
+  position: absolute;
+  inset: -45%;
+  background: radial-gradient(circle at 0 0, rgba(255, 207, 51, 0.1), transparent 60%);
+  opacity: 0;
+  transition: opacity var(--transition-med);
 }
 
 .journey-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-4px) scale(1.01);
   border-color: rgba(255, 207, 51, 0.45);
-  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.8);
-  background: linear-gradient(150deg, rgba(255, 255, 255, 0.07), rgba(8, 10, 33, 0.98));
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.8);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(5, 8, 26, 0.98));
 }
 
-.journey-image {
-  width: 100%;
-  height: 95px;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+.journey-card:hover::before {
+  opacity: 1;
 }
 
 .journey-title {
-  margin: 0;
+  margin: 0 0 0.2rem;
   font-size: 1rem;
-  font-weight: 600;
 }
-
 .journey-location {
-  margin: 0.3rem 0;
+  margin: 0 0 0.45rem;
   font-size: 0.9rem;
   color: var(--accent-2);
-  font-weight: 500;
 }
-
 .journey-description {
   margin: 0;
   font-size: 0.88rem;
   color: var(--text-muted);
-  line-height: 1.45;
 }
 
 .state-text {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
-  margin-top: 1rem;
-  text-align: center;
+  margin-top: 0.5rem;
 }
 
-/* Footer styling */
 .footer {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding: 1.4rem;
   text-align: center;
   font-size: 0.85rem;
   color: var(--text-muted);
-  background: var(--bg);
+  background: #050816;
 }
 
 @keyframes cardPop {
@@ -541,7 +524,6 @@ body {
   animation: cardPop 0.35s ease-out;
 }
 
-/* Responsive adjustments */
 @media (max-width: 900px) {
   .dashboard-grid {
     grid-template-columns: 1fr;

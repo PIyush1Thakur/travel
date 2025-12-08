@@ -3,22 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <title>User Registration</title>
-</head>
-<body>
-<h2>Register</h2>
+    <style>
+      
+        :root {
+            --bg: #050816;
+            --bg-card: rgba(7, 12, 32, 0.96);
+            --accent: #ff7a3c;
+            --accent-soft: rgba(255, 122, 60, 0.25);
+            --accent-2: #ffcf33;
+            --text: #f8f8ff;
+            --text-muted: #b4b6c8;
+            --border-subtle: rgba(255, 255, 255, 0.15);
+            --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.7);
+            --radius-lg: 20px;
+            --transition-fast: 0.2s ease;
+            --transition-med: 0.3s ease;
+        }
 
-<form id="registerForm">
-    <input type="text" name="username" placeholder="Username" id="username" required><br><br>
-    <input type="password" name="password" placeholder="Password" id="password" required><br><br>
-    <button type="submit">Register</button>
-</form>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body.main {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(circle at top, rgba(255, 207, 51, 0.08), transparent 60%),
+                radial-gradient(circle at bottom, rgba(255, 122, 60, 0.12), transparent 60%),
+                #050816;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Poppins", sans-serif;
+            color: var(--text);
+            overflow: hidden;
+        }
+
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(50px);
+            opacity: 0.35;
+            z-index: -1;
+        }
+
+        .orb-1 {
+            width: 320px;
+            height: 320px;
+            background: #ff7a3c;
+            top: -80px;
+            left: -40px;
+        }
+
+        .orb-2 {
+            width: 380px;
+            height: 380px;
+            background: #ffcf33;
+            bottom: -140px;
+            right: -60px;
+        }
+
+        .form {
+            width: min(380px, 90vw);
+            padding: 2.1rem 2.2rem 2.3rem;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(6, 10, 28, 0.98));
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-soft);
+            animation: slideUp 0.7s ease-out forwards;
+            transform: translateY(20px);
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #heading {
+            text-align: center;
+            font-size: 1.45rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        #heading::before {
+            content: "";
+            position: absolute;
+            width: 36%;
+            height: 3px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            left: 50%;
+            bottom: -0.55rem;
+            transform: translateX(-50%);
+        }
+
+        .field {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 0.9rem 0.75rem 1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(5, 8, 24, 0.9);
+            color: var(--text);
+            outline: none;
+        }
+
+        .button {
+            width: 100%;
+            border-radius: 999px;
+            padding: 0.8rem;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(120deg, var(--accent), var(--accent-2));
+            font-weight: bold;
+            color: #050816;
+        }
+
+        .message {
+            margin-top: 0.5rem;
+            min-height: 1rem;
+            font-size: 0.8rem;
+        }
+
+        .message.error { color: #ff6b81; }
+        .message.success { color: #42f59b; }
+
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(18px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="main">
+
+<div class="bg-orb orb-1"></div>
+<div class="bg-orb orb-2"></div>
+
+<div class="form">
+    <div id="heading">Register</div>
+
+    <form id="registerForm">
+        <div class="field">
+            <input type="text" id="username" placeholder="Username" class="input-field" required>
+        </div>
+
+        <div class="field">
+            <input type="password" id="password" placeholder="Password" class="input-field" required>
+        </div>
+
+        <button type="submit" class="button">Register</button>
+
+        <p id="message" class="message"></p>
+    </form>
+</div>
 
 <script>
-    document.getElementById("registerForm").addEventListener("submit", async (e) => {
+    const form = document.getElementById("registerForm");
+    const msgBox = document.getElementById("message");
+
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        msgBox.textContent = "";
 
         try {
             const res = await fetch("http://localhost:8080/api/auth/register", {
@@ -30,13 +189,20 @@
             const msg = await res.text();
 
             if (res.ok) {
-                alert(msg);
+                msgBox.textContent = "Registration successful.";
+                msgBox.className = "message success";
+
+                setTimeout(() => {
+                    window.location.href = "/";
+                }, 1200);
 
             } else {
-                alert("Error: " + msg);
+                msgBox.textContent = msg;
+                msgBox.className = "message error";
             }
-        } catch (error) {
-            alert("Network error: " + error);
+        } catch (err) {
+            msgBox.textContent = "Network error: " + err;
+            msgBox.className = "message error";
         }
     });
 </script>

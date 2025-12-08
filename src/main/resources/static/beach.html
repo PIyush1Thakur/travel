@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Beach & Chill · Incredible India</title>
+    <link rel="icon" href="img/favicon.png" type="image/png" />
+    <!-- Base Styles (your main theme) -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Beach-specific Styles -->
+    <link rel="stylesheet" href="css/beach.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Header / Navbar -->
+    <header class="main-header">
+      <nav class="navbar">
+        <div class="logo">
+          <span class="logo-mark">✈️</span>
+          <span class="logo-text">Incredible<span>India</span></span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="index.html#planner">Planner</a></li>
+          <li><a href="index.html#vibes">Vibes</a></li>
+          <li><a href="index.html#heritage">Heritage</a></li>
+          <li><a href="index.html#wildlife">Wildlife</a></li>
+          <li><a href="dashboard.html">My Journey</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Hero: Beach & Chill -->
+    <section id="top" class="hero hero-beach">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-tagline beach-tagline">Beach & Chill · Coastal Escapes</p>
+        <h1>Slow Days, Salty Hair & Golden Sunsets</h1>
+        <p class="hero-subtitle">
+          Explore India’s most beautiful coasts – from Goa to Gokarna, Varkala to
+          the Andamans. Pick your vibe: party shores, quiet coves, or family-friendly
+          beaches.
+        </p>
+        <div class="hero-actions">
+          <a href="#escapes" class="btn primary-btn">View Top Beach Escapes</a>
+          <a href="#planner-hook" class="btn ghost-btn">Plan a Beach Trip</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Top Beach Escapes -->
+    <section id="escapes" class="section beach-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span>Top Beach Escapes</span>
+        </h2>
+        <p class="section-subtitle">
+          Choose your coastline – party-heavy, laid-back, or blissfully offbeat.
+        </p>
+      </div>
+
+      <!-- Filter Chips -->
+      <div class="chip-row">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="party">Party & Nightlife</button>
+        <button class="chip" data-filter="calm">Calm & Quiet</button>
+        <button class="chip" data-filter="scenic">Scenic & Instagrammable</button>
+        <button class="chip" data-filter="family">Family Friendly</button>
+      </div>
+
+      <div class="card-grid beach-card-grid">
+        <!-- Goa -->
+        <article class="card beach-card" data-tags="party scenic family">
+          <div class="card-image card-image-beach-goa"></div>
+          <div class="card-content">
+            <h3>Goa</h3>
+            <p class="card-meta">Baga · Calangute · Palolem</p>
+            <p class="card-text">
+              Legendary shacks, sunset parties, water sports and café culture. North Goa for
+              nightlife, South Goa for quieter, scenic beaches.
+            </p>
+            <ul class="pill-list">
+              <li>#Nightlife</li>
+              <li>#WaterSports</li>
+              <li>#Cafés</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Gokarna -->
+        <article class="card beach-card" data-tags="calm scenic">
+          <div class="card-image card-image-beach-gokarna"></div>
+          <div class="card-content">
+            <h3>Gokarna</h3>
+            <p class="card-meta">Kudle · Om · Half Moon</p>
+            <p class="card-text">
+              Cliffside cafés, peaceful shores and short hikes between coves – perfect if
+              you want Goan vibes without the big crowds.
+            </p>
+            <ul class="pill-list">
+              <li>#Chill</li>
+              <li>#Backpacker</li>
+              <li>#Sunsets</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Varkala -->
+        <article class="card beach-card" data-tags="calm scenic family">
+          <div class="card-image card-image-beach-varkala"></div>
+          <div class="card-content">
+            <h3>Varkala</h3>
+            <p class="card-meta">Kerala · Cliffside Beach Town</p>
+            <p class="card-text">
+              Dramatic cliffs overlooking the Arabian Sea, Ayurvedic retreats and relaxed
+              beach cafés – ideal for slow travel.
+            </p>
+            <ul class="pill-list">
+              <li>#CliffViews</li>
+              <li>#Ayurveda</li>
+              <li>#SlowTravel</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Andaman & Nicobar -->
+        <article class="card beach-card" data-tags="scenic family calm">
+          <div class="card-image card-image-beach-andaman"></div>
+          <div class="card-content">
+            <h3>Andaman & Nicobar Islands</h3>
+            <p class="card-meta">Havelock · Neil Island</p>
+            <p class="card-text">
+              White sand, turquoise water, coral reefs and starry skies. Great for scuba,
+              snorkeling and a more exclusive island feel.
+            </p>
+            <ul class="pill-list">
+              <li>#Scuba</li>
+              <li>#Snorkeling</li>
+              <li>#IslandLife</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section: Perfect Beach Day Planner (anchor back to main planner) -->
+    <section id="planner-hook" class="section day-plan-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span>Your Perfect Beach Day</span>
+        </h2>
+        <p class="section-subtitle">
+          Use this as a mini blueprint, then jump back to the main planner to turn it into a full trip.
+        </p>
+      </div>
+
+      <div class="day-plan-grid">
+        <article class="day-block">
+          <h3>Morning</h3>
+          <p>
+            Sunrise walk, light breakfast at a shack and maybe a calm swim before crowds arrive.
+          </p>
+          <ul>
+            <li>Sunrise at the quietest stretch of beach</li>
+            <li>Local breakfast: poha, dosa or fresh fruit bowls</li>
+            <li>Short wander through nearby markets</li>
+          </ul>
+        </article>
+
+        <article class="day-block">
+          <h3>Afternoon</h3>
+          <p>
+            Water activities and lazy hours under a beach umbrella with a book or playlist.
+          </p>
+          <ul>
+            <li>Water sports (parasailing, surfing, kayaking – depending on the coast)</li>
+            <li>Lunch at a sea-facing café</li>
+            <li>Midday siesta or spa / Ayurvedic massage</li>
+          </ul>
+        </article>
+
+        <article class="day-block">
+          <h3>Sunset & Night</h3>
+          <p>
+            Switch from chill to party mode — or keep it slow with live music and bonfires.
+          </p>
+          <ul>
+            <li>Sunset viewpoint with camera in hand</li>
+            <li>Live music / bonfire / night market stroll</li>
+            <li>Stargazing or a quiet walk along the shore</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="day-plan-cta">
+        <a href="index.html#planner" class="btn primary-btn">
+          Open Full Trip Planner
+        </a>
+      </div>
+    </section>
+
+    <!-- Section: Beach Gallery -->
+    <section id="gallery" class="section gallery-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span>Beach Gallery</span>
+        </h2>
+        <p class="section-subtitle">
+          Hover to reveal details – imagine your next wallpaper coming from here.
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+        <figure class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1521292270410-a8c53642e9d0?auto=format&fit=crop&w=1200&q=80"
+            alt="Goa sunset beach"
+          />
+          <figcaption>
+            Goa · Sunset shacks & silhouettes
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1200&q=80"
+            alt="Palm lined coastline"
+          />
+          <figcaption>
+            Kerala · Palm-lined calm shores
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1526481280695-3c687fd543c0?auto=format&fit=crop&w=1200&q=80"
+            alt="Party lights by the sea"
+          />
+          <figcaption>
+            Nightlife · Music, lights & sea breeze
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+            alt="Waves at dusk"
+          />
+          <figcaption>
+            Anywhere · Waves, dusk & reset
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Copyrights &copy; 2025 INCREDIBLE INDIA · TEAM MOBIUS</p>
+    </footer>
+
+    <script src="js/beach.js" defer></script>
+  </body>
+</html>

@@ -51,50 +51,44 @@
             Save your trips with a title, location and a short story or notes.
           </p>
 
-          <form id="journeyForm" class="journey-form" enctype="multipart/form-data">
+          <form id="journeyForm" class="journey-form">
             <div class="form-group">
               <label for="jortitle">Journey Title</label>
               <input
-                      type="text"
-                      id="jortitle"
-                      name="jortitle"
-                      placeholder="e.g. Monsoon Roadtrip to Goa"
-                      required
+                type="text"
+                id="jortitle"
+                name="jortitle"
+                placeholder="e.g. Monsoon Roadtrip to Goa"
+                required
               />
             </div>
 
             <div class="form-group">
               <label for="jorlocation">Location</label>
               <input
-                      type="text"
-                      id="jorlocation"
-                      name="jorlocation"
-                      placeholder="e.g. Goa, Maharashtra"
-                      required
+                type="text"
+                id="jorlocation"
+                name="jorlocation"
+                placeholder="e.g. Goa, Maharashtra"
+                required
               />
             </div>
 
             <div class="form-group">
               <label for="jordescription">Short Description</label>
               <textarea
-                      id="jordescription"
-                      name="jordescription"
-                      rows="5"
-                      placeholder="Sunsets at the beach, local food, and scooter rides along the coast..."
-                      required
+                id="jordescription"
+                name="jordescription"
+                rows="5"
+                placeholder="Sunsets at the beach, local food, and scooter rides along the coast..."
+                required
               ></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="jorimage">Upload Image</label>
-              <input type="file" id="jorimage" name="image" accept="image/*" />
             </div>
 
             <button type="submit" class="btn primary-btn full-width">
               Save Journey
             </button>
           </form>
-
         </section>
 
         <section class="panel panel-right">
@@ -105,15 +99,8 @@
               <h2 id="previewTitle">Journey Title...</h2>
               <h4 id="previewLocation">Journey Location...</h4>
               <p id="previewDescription">Journey Description...</p>
-              <img
-                      id="previewImage"
-                      src=""
-                      alt="Journey Image"
-                      style="display:none; max-width:100%; margin-top:10px; border-radius:8px;"
-              />
             </div>
           </div>
-
 
           <div class="journeys-wrapper">
             <div class="journeys-header">

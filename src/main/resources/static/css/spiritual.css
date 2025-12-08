@@ -1,0 +1,488 @@
+/* Spiritual & Peaceful page specific styles
+   This file assumes your global theme (colors, fonts, buttons, navbar, etc.)
+   is defined in css/style.css. Here we only add / override for this page.
+*/
+
+/* ---------- HERO ---------- */
+
+.spiritual-hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  padding: 6rem min(7vw, 5rem) 4rem;
+  color: #fff;
+  overflow: hidden;
+}
+
+.spiritual-hero::before {
+  content: "";
+  position: absolute;
+  inset: -15% -10%;
+  background: url("https://images.unsplash.com/photo-1523419409543-3e4f83b9b4c9?auto=format&fit=crop&w=1400&q=80")
+    center/cover no-repeat;
+  filter: saturate(1.2) contrast(1.1);
+  opacity: 0.3;
+  z-index: -2;
+}
+
+.spiritual-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.08), transparent 60%),
+    radial-gradient(circle at 80% 100%, rgba(0, 0, 0, 0.7), transparent 60%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.65), #050816);
+  z-index: -1;
+}
+
+.spiritual-hero-content {
+  max-width: 640px;
+  position: relative;
+  animation: spiritualFadeUp 1.2s ease-out forwards;
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.spiritual-tagline {
+  background: rgba(0, 0, 0, 0.65);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.spiritual-tagline::after {
+  content: "ॐ";
+  margin-left: 0.35rem;
+  font-size: 0.85rem;
+}
+
+/* ---------- DESTINATIONS GRID ---------- */
+
+.spiritual-destinations {
+  position: relative;
+}
+
+.spiritual-destinations::before {
+  content: "";
+  position: absolute;
+  inset: 10% -40%;
+  background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.08), transparent 60%);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.spiritual-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.spiritual-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(5, 8, 22, 0.98)
+  );
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
+  transform: translateY(0) scale(1);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+  position: relative;
+}
+
+.spiritual-card::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.12), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.spiritual-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.9);
+  border-color: rgba(255, 207, 51, 0.5);
+}
+
+.spiritual-card:hover::before {
+  opacity: 1;
+}
+
+.spiritual-card-image {
+  height: 180px;
+  position: relative;
+  overflow: hidden;
+}
+
+.spiritual-card-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent 55%);
+}
+
+/* Background images for the destinations */
+.img-varanasi {
+  background: url("https://images.unsplash.com/photo-1532372576444-dda954194ad0?auto=format&fit=crop&w=1200&q=80")
+    center/cover no-repeat;
+}
+
+.img-rishikesh {
+  background: url("https://images.unsplash.com/photo-1613665813446-82a78c468a1c?auto=format&fit=crop&w=1200&q=80")
+    center/cover no-repeat;
+}
+
+.img-bodhgaya {
+  background: url("https://images.unsplash.com/photo-1574056513184-1c292589dbb0?auto=format&fit=crop&w=1200&q=80")
+    center/cover no-repeat;
+}
+
+.img-amritsar {
+  background: url("https://images.unsplash.com/photo-1599661046289-01f53c54fe40?auto=format&fit=crop&w=1200&q=80")
+    center/cover no-repeat;
+}
+
+.spiritual-card-content {
+  padding: 1.3rem 1.4rem 1.5rem;
+}
+
+.spiritual-card-content h3 {
+  margin: 0 0 0.2rem;
+  font-size: 1.15rem;
+}
+
+.spiritual-location {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.spiritual-text {
+  margin-top: 0.7rem;
+  font-size: 0.9rem;
+  color: #b7bad0;
+}
+
+.spiritual-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+}
+
+.chip {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(3, 6, 23, 0.9);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.9;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.chip:hover {
+  background: rgba(255, 207, 51, 0.18);
+  border-color: rgba(255, 207, 51, 0.7);
+  transform: translateY(-2px);
+}
+
+/* ---------- EXPERIENCES SECTION ---------- */
+
+.spiritual-experiences {
+  position: relative;
+}
+
+.spiritual-experiences::before {
+  content: "";
+  position: absolute;
+  inset: 15% -30%;
+  background: radial-gradient(circle at 100% 0, rgba(255, 207, 51, 0.12), transparent 60%);
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.experiences-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 2.4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.experience-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.experience-item {
+  position: relative;
+  padding: 1.1rem 1.2rem 1rem 1.4rem;
+  margin-bottom: 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(5, 8, 22, 0.9);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  transform: translateX(0);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.experience-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 3px;
+  height: 26px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffcf33, #ff7a3c);
+}
+
+.experience-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.08), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.experience-item h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+}
+
+.experience-item p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #b5b8d1;
+}
+
+.experience-item:hover {
+  transform: translateX(4px);
+  border-color: rgba(255, 207, 51, 0.5);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.85);
+}
+
+.experience-item:hover::after {
+  opacity: 1;
+}
+
+/* Experience highlight card */
+
+.experience-highlight {
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 1.6rem 1.6rem 1.8rem;
+  background: linear-gradient(
+    140deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(5, 8, 22, 0.95)
+  );
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+.experience-highlight::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 100% 0, rgba(255, 255, 255, 0.13), transparent 65%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.experience-highlight h3 {
+  margin-top: 0;
+}
+
+.experience-highlight p {
+  font-size: 0.9rem;
+  color: #d0d2e5;
+}
+
+.itinerary-preview {
+  list-style: none;
+  margin: 1rem 0 1.4rem;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+.itinerary-preview li + li {
+  margin-top: 0.4rem;
+}
+
+.small-btn {
+  padding-inline: 1.2rem;
+  font-size: 0.8rem;
+}
+
+/* ---------- MINI ITINERARY TIMELINE ---------- */
+
+.spiritual-itinerary {
+  position: relative;
+}
+
+.spiritual-itinerary::before {
+  content: "";
+  position: absolute;
+  inset: 20% -40%;
+  background: radial-gradient(circle at 50% 0, rgba(255, 207, 51, 0.12), transparent 65%);
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.itinerary-timeline {
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.itinerary-timeline::before {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  top: 0.35rem;
+  bottom: 0.35rem;
+  width: 2px;
+  background: linear-gradient(to bottom, #ffcf33, #ff7a3c);
+  opacity: 0.75;
+}
+
+.itinerary-step {
+  position: relative;
+  margin-bottom: 1.9rem;
+  padding-left: 1.5rem;
+}
+
+.itinerary-dot {
+  position: absolute;
+  left: -0.1rem;
+  top: 0.45rem;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #050816;
+  border: 2px solid #ffcf33;
+  box-shadow: 0 0 0 4px rgba(255, 207, 51, 0.18);
+}
+
+.itinerary-content {
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(5, 8, 22, 0.95);
+  padding: 0.8rem 1rem 1rem;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.8);
+  transform-origin: left;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.itinerary-content h3 {
+  margin: 0 0 0.35rem;
+  font-size: 0.98rem;
+}
+
+.itinerary-content p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #c4c6dd;
+}
+
+.itinerary-step:hover .itinerary-content {
+  transform: translateX(4px);
+  border-color: rgba(255, 207, 51, 0.5);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.9);
+}
+
+/* ---------- SCROLL-REVEAL STATES (JS adds .is-visible) ---------- */
+
+.spiritual-card,
+.experience-item,
+.itinerary-step {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.spiritual-card.is-visible,
+.experience-item.is-visible,
+.itinerary-step.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+/* ---------- ANIMATIONS ---------- */
+
+@keyframes spiritualFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 900px) {
+  .spiritual-hero {
+    padding-inline: 1.6rem;
+    min-height: 70vh;
+  }
+
+  .experiences-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .experience-highlight {
+    order: -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .spiritual-card-image {
+    height: 160px;
+  }
+
+  .itinerary-timeline {
+    padding-left: 1.2rem;
+  }
+
+  .itinerary-timeline::before {
+    left: 0.35rem;
+  }
+
+  .itinerary-step {
+    padding-left: 1.4rem;
+  }
+
+  .itinerary-dot {
+    left: -0.15rem;
+  }
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Nightlife & Party – Incredible India</title>
+    <link rel="icon" href="img/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="css/nightlife.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+</head>
+<body>
+
+<header class="main-header">
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-mark">🎉</span>
+      <span class="logo-text">Incredible<span>India</span></span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#planner">Planner</a></li>
+      <li><a href="index.html#vibes">Vibes</a></li>
+      <li><a href="index.html#heritage">Heritage</a></li>
+      <li><a href="index.html#wildlife">Wildlife</a></li>
+      <li><a href="dashboard.html">My Journey</a></li>
+    </ul>
+    <button class="nav-toggle"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<section class="hero nightlife-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Nightlife & Party</h1>
+        <p>City lights, music, dance, beaches — India never sleeps. Explore the most energetic party destinations.</p>
+        <a href="#cities" class="btn primary-btn">Explore Cities</a>
+    </div>
+</section>
+
+<section id="cities" class="section nightlife-section">
+  <div class="section-header">
+      <h2 class="section-title"><span>Top Nightlife Cities</span></h2>
+      <p class="section-subtitle">Pubs, beach clubs, concerts and neon vibes across India.</p>
+  </div>
+
+  <div class="party-grid">
+
+    <article class="party-card">
+      <div class="party-img img-mumbai"></div>
+      <h3>Mumbai</h3>
+      <p class="city-tag">“City of Dreams”</p>
+      <p>From Bandra clubs to Marine Drive views — a paradise for night owls.</p>
+      <button class="party-btn" data-city="mumbai">Explore Hotspots →</button>
+    </article>
+
+    <article class="party-card">
+      <div class="party-img img-goa"></div>
+      <h3>Goa</h3>
+      <p class="city-tag">Beach Party Haven</p>
+      <p>Shacks, live DJs, night beach festivals — a forever-celebration.</p>
+      <button class="party-btn" data-city="goa">Explore Hotspots →</button>
+    </article>
+
+    <article class="party-card">
+      <div class="party-img img-bangalore"></div>
+      <h3>Bangalore</h3>
+      <p class="city-tag">Music & Craft Beer Hub</p>
+      <p>Microbreweries, gigs & neon nightlife that sets you dancing.</p>
+      <button class="party-btn" data-city="bangalore">Explore Hotspots →</button>
+    </article>
+
+    <article class="party-card">
+      <div class="party-img img-delhi"></div>
+      <h3>Delhi NCR</h3>
+      <p class="city-tag">Clubs & Rooftops</p>
+      <p>Top-tier bars, energetic crowds, and late-night food spots.</p>
+      <button class="party-btn" data-city="delhi">Explore Hotspots →</button>
+    </article>
+
+  </div>
+</section>
+
+<!-- Modal Popup -->
+<div class="modal" id="cityModal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h3 id="cityName"></h3>
+    <ul id="citySpots"></ul>
+  </div>
+</div>
+
+<footer class="footer">
+    <p>© 2025 Incredible India · Nightlife Edition</p>
+</footer>
+
+<script src="js/nightlife.js" defer></script>
+</body>
+</html>
