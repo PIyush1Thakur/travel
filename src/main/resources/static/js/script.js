@@ -1,4 +1,3 @@
-// Mobile nav toggle
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 
@@ -93,7 +92,7 @@ plannerForm.addEventListener("submit", (e) => {
   `;
 
   plannerOutput.classList.remove("highlight");
-  void plannerOutput.offsetWidth; // force reflow
+  void plannerOutput.offsetWidth;
   plannerOutput.classList.add("highlight");
 
   plannerOutput.scrollIntoView({ behavior: "smooth", block: "start" });

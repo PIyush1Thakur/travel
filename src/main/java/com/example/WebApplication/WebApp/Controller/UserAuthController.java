@@ -46,7 +46,7 @@ public class UserAuthController {
         usersRepository.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
     }
-
+// Team need to load that fast
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UsersEntries loginRequest) {

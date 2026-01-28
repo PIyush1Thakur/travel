@@ -1,4 +1,3 @@
-// Mobile nav toggle
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 
@@ -8,8 +7,6 @@ if (navToggle) {
     navToggle.classList.toggle("active");
   });
 }
-
-// IntersectionObserver for reveal animations
 const revealElements = document.querySelectorAll("[data-reveal], .card, .activity-card, .timeline-item, .tip-card");
 
 const observer = new IntersectionObserver(
@@ -28,7 +25,6 @@ const observer = new IntersectionObserver(
 
 revealElements.forEach((el) => observer.observe(el));
 
-// Smooth scroll for internal links on this page (if any)
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
     const targetId = this.getAttribute("href");

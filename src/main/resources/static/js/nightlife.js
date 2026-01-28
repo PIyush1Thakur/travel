@@ -16,14 +16,10 @@ const nightlifeData = {
     spots: ["CP Rooftops", "Hauz Khas Village", "Gurgaon Nightclubs"]
   }
 };
-
-// Modal elements
 const modal = document.getElementById("cityModal");
 const cityName = document.getElementById("cityName");
 const citySpots = document.getElementById("citySpots");
 const closeBtn = document.querySelector(".close-btn");
-
-// Open modal
 document.querySelectorAll(".party-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const cityKey = btn.dataset.city;
@@ -35,8 +31,6 @@ document.querySelectorAll(".party-btn").forEach(btn => {
     modal.style.display = "flex";
   });
 });
-
-// Close modal
 closeBtn.addEventListener("click", () => modal.style.display = "none");
 modal.addEventListener("click", (e) => {
   if(e.target === modal) modal.style.display = "none";

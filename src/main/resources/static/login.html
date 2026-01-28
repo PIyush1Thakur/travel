@@ -22,8 +22,6 @@
       </a>
     </nav>
   </header>
-
-  <!-- Status banner (for logout message etc.) -->
   <div id="statusBanner" class="status-banner" aria-live="polite"></div>
 
   <main class="auth-wrapper">
@@ -37,7 +35,6 @@
       </p>
 
       <form class="form" method="post" action="/api/auth/login" novalidate>
-        <!-- Username field -->
         <div class="field">
           <label for="username" class="field-label">Username</label>
           <div class="field-inner">
@@ -64,8 +61,6 @@
             />
           </div>
         </div>
-
-        <!-- Password field -->
         <div class="field">
           <label for="password" class="field-label">Password</label>
           <div class="field-inner">
@@ -94,8 +89,6 @@
             </button>
           </div>
         </div>
-
-        <!-- Actions -->
         <div class="actions">
           <button class="button button-primary" type="submit">
             Login

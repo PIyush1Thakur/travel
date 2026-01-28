@@ -14,7 +14,16 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageOutputStream;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,12 +45,12 @@ public class Journey_controller {
     @Autowired
     private UsersRepository usersRepository;
 
-    @GetMapping("/whoami")
-    public String whoAmI(Authentication auth) {
-        return "You are " + auth.getName() + " with roles: " + auth.getAuthorities();
-    }
+//    @GetMapping("/whoami")
+//    public String whoAmI(Authentication auth) {
+//        return "You are " + auth.getName() + " with roles: " + auth.getAuthorities();
+//    }
 
-
+    // Team need to load that fast
 
 
     @GetMapping("/journey/my")
@@ -72,57 +81,43 @@ public class Journey_controller {
 
     @PostMapping("/add/journey")
     @Transactional
-    public ResponseEntity<?> addProduct(
-            @RequestParam("jortitle") String title,
-            @RequestParam("jorlocation") String location,
-            @RequestParam("jordescription") String description,
+    public ResponseEntity<?> addProduct(@RequestParam("jortitle") String title, @RequestParam("jorlocation") String location, @RequestParam("jordescription") String description,
             @RequestParam("image") MultipartFile image) {
 
         try {
-            Path uploadDir = Paths
-                    .get(System.getProperty("user.dir"), "uploads")
-                    .toAbsolutePath()
-                    .normalize();
-
-            File folder = uploadDir.toFile();
-
-            if (!folder.exists()) {
-                boolean created = folder.mkdirs();
-                System.out.println("Created uploads folder: " + created);
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            var user = usersRepository.findByUsername(username);
+            if (user == null) {
+                return ResponseEntity.status(404).body("User not found.");
             }
-
-            if (!folder.exists()) {
+            Path uploadDir = Paths.get("uploads").toAbsolutePath();
+            File folder = uploadDir.toFile();
+            if (!folder.exists() && !folder.mkdirs()) {
                 return ResponseEntity.status(500).body("Cannot create uploads directory.");
             }
-
             String originalName = StringUtils.cleanPath(image.getOriginalFilename());
             String fileName = System.currentTimeMillis() + "_" + originalName;
-
             Path filePath = uploadDir.resolve(fileName);
-
-            System.out.println("Saving file to: " + filePath);
-
             Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-            Journey newJourney = new Journey(
+            Journey journey = new Journey(
                     title,
                     location,
                     description,
-                    usersRepository.findByUsername(
-                            SecurityContextHolder.getContext().getAuthentication().getName()
-                    ).getId(),
+                    user.getId(),
                     "uploads/" + fileName
             );
 
-            journeyRepository.save(newJourney);
+            journeyRepository.save(journey);
 
-            return ResponseEntity.ok("Journey Added Successfully");
+            return ResponseEntity.ok("Journey added successfully!");
 
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Error: " + e.getMessage());
         }
     }
+
+    // for future use , Team remember
 
     @DeleteMapping("/jounery/{id}")
     public ResponseEntity<?> deletejourney(@PathVariable String id){

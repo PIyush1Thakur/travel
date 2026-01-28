@@ -1,4 +1,3 @@
-// Mobile nav toggle (same behaviour as main page)
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 
@@ -8,20 +7,14 @@ if (navToggle) {
     navToggle.classList.toggle("active");
   });
 }
-
-// Filter: Top Beach Escapes
 const chips = document.querySelectorAll(".chip");
 const beachCards = document.querySelectorAll(".beach-card");
 
 chips.forEach((chip) => {
   chip.addEventListener("click", () => {
     const filter = chip.dataset.filter;
-
-    // Active chip state
     chips.forEach((c) => c.classList.remove("active"));
     chip.classList.add("active");
-
-    // Show / hide cards with smooth transitions
     beachCards.forEach((card) => {
       const tags = (card.dataset.tags || "").split(" ");
 
@@ -33,8 +26,6 @@ chips.forEach((chip) => {
     });
   });
 });
-
-// Optional: subtle scroll reveal for sections
 const observerOptions = {
   threshold: 0.15,
 };
@@ -53,8 +44,6 @@ const observer = new IntersectionObserver(revealOnScroll, observerOptions);
 document
   .querySelectorAll(".section")
   .forEach((section) => observer.observe(section));
-
-// Add some CSS for .in-view via JS (if not already in your main CSS)
 const extraStyle = document.createElement("style");
 extraStyle.textContent = `
   .section {

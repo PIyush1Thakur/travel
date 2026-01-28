@@ -1,4 +1,3 @@
-/* Navigation Toggle */
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 
@@ -9,7 +8,6 @@ if (navToggle) {
     });
 }
 
-/* Preview Binding */
 function bindPreview(input, target, fallback) {
     input.addEventListener("input", () => {
         target.textContent = input.value.trim() || fallback;
@@ -24,10 +22,6 @@ bindPreview(titleInput, document.getElementById("previewTitle"), "Journey Title.
 bindPreview(locationInput, document.getElementById("previewLocation"), "Journey Location...");
 bindPreview(descriptionInput, document.getElementById("previewDescription"), "Journey Description...");
 
-
-/* ==========================
-   LOAD JOURNEYS
-   ========================== */
 async function loadJourneys() {
     const container = document.getElementById("journeysContainer");
     container.innerHTML = `<p class="state-text">Loading your journeys...</p>`;
@@ -53,7 +47,11 @@ async function loadJourneys() {
             card.className = "journey-card";
 
             card.innerHTML = `
-                <img src="http://localhost:8080/${journey.imagepath}" class="journey-image"/>
+                <img
+                  src="http://localhost:8080/${journey.imagePath}"
+                  style="width: 100%; height: 100px; object-fit: cover; border-radius: 12px; display: block;"
+                  alt="Journey image"
+                />
                 <h4 class="journey-title">${journey.jortitle}</h4>
                 <p class="journey-location">${journey.jorlocation}</p>
                 <p class="journey-description">${journey.jordescription}</p>
@@ -68,10 +66,6 @@ async function loadJourneys() {
     }
 }
 
-
-/* ==========================
-   SUBMIT JOURNEY (MULTIPART)
-   ========================== */
 const journeyForm = document.getElementById("journeyForm");
 
 journeyForm.addEventListener("submit", async (event) => {
@@ -106,9 +100,5 @@ journeyForm.addEventListener("submit", async (event) => {
         console.error(error);
     }
 });
-
-/* Manual Reload */
 document.getElementById("reloadJourneysBtn").addEventListener("click", loadJourneys);
-
-/* First Load */
 loadJourneys();
