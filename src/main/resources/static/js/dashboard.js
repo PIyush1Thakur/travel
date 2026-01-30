@@ -27,7 +27,7 @@ async function loadJourneys() {
     container.innerHTML = `<p class="state-text">Loading your journeys...</p>`;
 
     try {
-        const res = await fetch("http://localhost:8080/user/journey/my");
+        const res = await fetch("/user/journey/my");
 
         if (!res.ok) {
             container.innerHTML = `<p class="state-text">Failed to load journeys.</p>`;
@@ -48,7 +48,7 @@ async function loadJourneys() {
 
             card.innerHTML = `
                 <img
-                  src="http://localhost:8080/${journey.imagePath}"
+                  src="/${journey.imagePath}"
                   style="width: 100%; height: 100px; object-fit: cover; border-radius: 12px; display: block;"
                   alt="Journey image"
                 />
@@ -74,7 +74,7 @@ journeyForm.addEventListener("submit", async (event) => {
     const formData = new FormData(journeyForm);
 
     try {
-        const res = await fetch("http://localhost:8080/user/add/journey", {
+        const res = await fetch("/user/add/journey", {
             method: "POST",
             body: formData
         });
